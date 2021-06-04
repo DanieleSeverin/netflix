@@ -1,6 +1,21 @@
-<div>Ultimi film
-    <div *ngFor="let film of films">
-        <h3>{{film.title}}</h3>
-        <img src="{{film.cover_url}}" alt="cover image" width="180px">
+<div class="container">
+        <p>Ultimi film</p>
+        <div class="row">
+            <div class="card col-3" *ngFor="let film of lastFilms">
+                    <p>{{film.title}}</p>
+                    <img src="{{film.cover_url}}" alt="cover image" width="180px" height="275px">
+            </div>
+        </div>
+
+    <br>
+
+    <div class="row">
+        <p>Top film</p>
+        <div *ngFor="let film of topFilms">
+            <div class="col film">
+                <p>{{film.title}}</p>
+                <img src="{{film.cover_url}}" alt="cover image" width="180px" height="275px">
+            </div>
+        </div>
     </div>
 </div>

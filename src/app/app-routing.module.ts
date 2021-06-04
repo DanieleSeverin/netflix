@@ -12,7 +12,7 @@ import { GenreEditComponent } from './components/genre-edit/genre-edit.component
 import { GenreListComponent } from './components/genre-list/genre-list.component';
 
 const routes: Routes = [
- // {path: '', redirectTo: '/dashboard', pathMatch: 'full'},
+  {path: '', redirectTo: '/dashboard', pathMatch: 'full'},
   {path: 'dashboard', component: DashboardComponent},
   {path: 'films/list', component: FilmListComponent},
   {path: 'films/add', component: FilmAddComponent},

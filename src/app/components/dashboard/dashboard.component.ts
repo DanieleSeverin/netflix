@@ -9,22 +9,36 @@ import { FilmService } from 'src/app/services/film.service';
 })
 export class DashboardComponent implements OnInit {
 
-  films: Film[] | null = null;
+  lastFilms: Film[] | null = null;
+  topFilms: Film[] | null = null;
 
   constructor(private _film : FilmService) { }
 
   ngOnInit(): void {
     this.getLastFilms();
+    this.getTopFilms();
   }
 
   getLastFilms(){
-    this._film.getLastFilms().subscribe(
+    this._film.getFilms().subscribe(
       (res) => {
-        this.films = res;
-        this.films = this.films.sort((film1, film2) => {
+        this.lastFilms = res;
+        this.lastFilms = this.lastFilms.sort((film1, film2) => {
           return (new Date(film2.created_at || '')).getTime() - (new Date(film1.created_at || '')).getTime();
         }).slice(0, 4);
-        console.log(this.films)
+        console.log(this.lastFilms)
+      }
+    );
+  }
+
+  getTopFilms(){
+    this._film.getFilms().subscribe(
+      (res) => {
+        this.topFilms = res;
+        this.topFilms = this.topFilms.sort((film1, film2) => {
+          return film2.vote - film1.vote;
+        }).slice(0, 4);
+        console.log(this.topFilms)
       }
     );
   }

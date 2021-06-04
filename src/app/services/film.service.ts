@@ -13,7 +13,7 @@ export class FilmService {
 
   getFilms(){
     let url = 'https://netflix.cristiancarrino.com/film/read.php';
-    return this.http.get(url)
+    return this.http.get<Film[]>(url)
     .pipe(
       catchError(error => {
         alert(error.status + ': ' + error.error);
@@ -65,14 +65,17 @@ export class FilmService {
         return[];
       })
     )
-
   }
 
   getTopFilms(){
-    this.getFilms().subscribe(
-      (res) => {
-        //to do sort function
-      }
+    let url = 'https://netflix.cristiancarrino.com/film/read.php';
+    return this.http.get<Film[]>(url)
+    .pipe(
+      tap(),
+      catchError(error => {
+        alert(error.status + ': ' + error.error);
+        return[];
+      })
     )
   }
 
