@@ -1,21 +1,58 @@
-<div class="container">
-        <p>Ultimi film</p>
+<div class="container-fluid">
+
+    <!-- Ultimi Film -->
+        <h2>Ultimi film</h2>
         <div class="row">
-            <div class="card col-3" *ngFor="let film of lastFilms">
-                    <p>{{film.title}}</p>
-                    <img src="{{film.cover_url}}" alt="cover image" width="180px" height="275px">
+            <div class="col-sm-6 col-md-4 col-lg-3" *ngFor="let film of lastFilms">
+                <div class="card">
+                    <div class="card-header d-flex">
+                        <span>{{film.duration.slice(0,5)}}</span>
+                        <span>{{film.vote}}</span>
+                    </div>
+                        <img src="{{film.cover_url}}" alt="cover image">
+                        <div class="container">
+                            <h5 class="card-title">{{film.title}}</h5>
+                            <h6 class="card-title">{{film.director}}, {{film.release_year}}</h6>
+                            <p class="card-text">{{film.description}}</p>
+                            <p style="font-weight:bold;">Attori:</p>
+                            <p>{{getActorsString(film)}}</p>
+                            <p style="font-weight:bold;">Genere:</p>
+                            <p>{{getGenresString(film)}}</p>
+                            <p style="font-weight:bold;">Tags:</p>
+                            <p>{{film.tags}}</p>
+                            <a href="" (click)="showModal(film, $event)">Mostra Trama</a>
+                        </div>
+                </div>
             </div>
         </div>
 
     <br>
 
-    <div class="row">
-        <p>Top film</p>
-        <div *ngFor="let film of topFilms">
-            <div class="col film">
-                <p>{{film.title}}</p>
-                <img src="{{film.cover_url}}" alt="cover image" width="180px" height="275px">
+        <!-- Top Film -->
+        <h2>Top film</h2>
+        <div class="row">
+            <div class="col-sm-6 col-md-4 col-lg-3" *ngFor="let film of topFilms">
+                <div class="card">
+                    <div class="card-header d-flex">
+                        <span>{{film.duration.slice(0,5)}}</span>
+                        <span>{{film.vote}}</span>
+                    </div>
+                        <img src="{{film.cover_url}}" alt="cover image">
+                        <div class="container">
+                            <h5 class="card-title">{{film.title}}</h5>
+                            <h6 class="card-title">{{film.director}}, {{film.release_year}}</h6>
+                            <p class="card-text">{{film.description}}</p>
+                            <p style="font-weight:bold;">Attori:</p>
+                            <p>{{getActorsString(film)}}</p>
+                            <p style="font-weight:bold;">Genere:</p>
+                            <p>{{getGenresString(film)}}</p>
+                            <p style="font-weight:bold;">Tags:</p>
+                            <p>{{film.tags}}</p>
+                            <a href="" (click)="showModal(film, $event)">Mostra Trama</a>
+                        </div>
+                </div>
             </div>
         </div>
-    </div>
-</div>
+
+<!-- Modale -->
+<app-modal [film]="film"></app-modal>

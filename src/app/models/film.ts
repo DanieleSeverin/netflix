@@ -10,7 +10,7 @@ export interface Film {
     director: string;
     duration: string;
     vote: number;
-    relase_year: number;
+    release_year: number;
     cover_url: string;
     tags: string;
     created_by?: number;

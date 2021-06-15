@@ -1,1 +1,36 @@
-<p>film-list works!</p>
+<div class="container-fluid">
+
+    <h2>Lista dei Film</h2>
+
+    <!-- Barra di ricerca -->
+    <form class="form-inline my-2 my-lg-0">
+        <input class="form-control mr-sm-2" type="search" placeholder="Cerca Film" aria-label="Search" 
+            [(ngModel)]="search" name="search" (ngModelChange)="inputBarIsChanged($event)">
+      </form> <br>
+
+      <!-- Lista dei Film -->
+        <div class="row">
+            <div class="col-sm-6 col-md-4 col-lg-3" *ngFor="let film of filmList">
+                <div class="card">
+                    <div class="card-header d-flex">
+                        <span>{{film.duration.slice(0,5)}}</span>
+                        <span>{{film.vote}}</span>
+                    </div>
+                        <img src="{{film.cover_url}}" alt="cover image">
+                        <div class="container">
+                            <h5 class="card-title">{{film.title}}</h5>
+                            <h6 class="card-title">{{film.director}}, {{film.release_year}}</h6>
+                            <p class="card-text">{{film.description}}</p>
+                            <p style="font-weight:bold;">Attori:</p>
+                            <p>{{getActorsString(film)}}</p>
+                            <p style="font-weight:bold;">Genere:</p>
+                            <p>{{getGenresString(film)}}</p>
+                            <p style="font-weight:bold;">Tags:</p>
+                            <p>{{film.tags}}</p>
+                            <a href="" (click)="showModal(film, $event)">Mostra Trama</a>
+                        </div>
+                </div>
+            </div>
+        </div>
+
+</div>

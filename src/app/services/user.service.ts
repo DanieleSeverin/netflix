@@ -8,9 +8,16 @@ import { User } from '../models/user';
 })
 export class UserService {
 
-  constructor(private http: HttpClient) { }
+  loggedUser: User | null = null;
+  isLoginFormOpen: boolean = false;
 
-  login(body: User){
+  constructor(private http: HttpClient) { 
+    if(localStorage.getItem('user') != null){
+      this.loggedUser = JSON.parse(localStorage.getItem('user')!);
+    }
+  }
+
+  login(body: any){
     let url = 'https://netflix.cristiancarrino.com/user/login.php';
     return this.http.post(url, body)
     .pipe(

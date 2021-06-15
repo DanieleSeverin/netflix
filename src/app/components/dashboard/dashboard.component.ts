@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Film } from 'src/app/models/film';
 import { FilmService } from 'src/app/services/film.service';
+import { ModalService } from 'src/app/services/modal.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -11,8 +12,10 @@ export class DashboardComponent implements OnInit {
 
   lastFilms: Film[] | null = null;
   topFilms: Film[] | null = null;
+  actorsString: string = '';
+  film!: Film;
 
-  constructor(private _film : FilmService) { }
+  constructor(private _film : FilmService, public _modal: ModalService) { }
 
   ngOnInit(): void {
     this.getLastFilms();
@@ -41,6 +44,33 @@ export class DashboardComponent implements OnInit {
         console.log(this.topFilms)
       }
     );
+  }
+  getActorsString(film: Film) :string{
+    let actorsString = '';
+    for(let i=0; i<film.actors.length; i++){
+      actorsString += film.actors[i].firstname + ' ' + film.actors[i].lastname;
+      if(i != film.actors.length-1){
+        actorsString += ', ';
+      }
+    }
+    return actorsString;
+  }
+
+  getGenresString(film: Film) :string{
+    let genresString = '';
+    for(let i=0; i<film.genres.length; i++){
+      genresString += film.genres[i].name;
+      if(i != film.actors.length-1){
+        genresString += ', ';
+      }
+    }
+    return genresString;
+  }
+
+  showModal(film: Film, event: Event){
+    event.preventDefault();
+    this.film = film;
+    this._modal.showModal();
   }
 
 }

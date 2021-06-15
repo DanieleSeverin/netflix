@@ -16,6 +16,9 @@ import { GenreEditComponent } from './components/genre-edit/genre-edit.component
 import { GenreListComponent } from './components/genre-list/genre-list.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ModalComponent } from './components/modal/modal.component';
+import { LoginFormComponent } from './components/navbar/login-form/login-form.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -30,13 +33,16 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     GenreAddComponent,
     GenreEditComponent,
     GenreListComponent,
-    NavbarComponent
+    NavbarComponent,
+    ModalComponent,
+    LoginFormComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    NgbModule
+    NgbModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
