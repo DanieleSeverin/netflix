@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Film } from 'src/app/models/film';
+import { User } from 'src/app/models/user';
 import { FilmService } from 'src/app/services/film.service';
 import { ModalService } from 'src/app/services/modal.service';
 import { UserService } from 'src/app/services/user.service';
@@ -16,6 +17,8 @@ export class FilmListComponent implements OnInit {
   filmList: Film[] | null = null;
   film!: Film;
   search: string | null = null;
+  user: User | null = null;
+  id:any;
 
   constructor(private _film: FilmService,
               public _user: UserService,
@@ -25,6 +28,9 @@ export class FilmListComponent implements OnInit {
 
   ngOnInit(): void {
     this.getFilms();
+    if(localStorage.getItem('user'))
+      this.user = JSON.parse(localStorage.getItem('user')!);
+    this.id = this.user?.id || -1;
   }
 
   getFilms(search?: string | null){
@@ -93,6 +99,10 @@ export class FilmListComponent implements OnInit {
 
   addFilm(){
     this.router.navigate(['films/add']);
+  }
+
+  editFilm(id:number){
+    this.router.navigate(['films/edit/' + id]);
   }
 
 }

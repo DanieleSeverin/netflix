@@ -4,6 +4,7 @@ import { first } from 'rxjs/operators';
 import { Actor } from 'src/app/models/actor';
 import { Genre } from 'src/app/models/genre';
 import { ActorService } from 'src/app/services/actor.service';
+import { FilmService } from 'src/app/services/film.service';
 import { GenreService } from 'src/app/services/genre.service';
 
 @Component({
@@ -34,6 +35,7 @@ export class FilmAddComponent implements OnInit {
 
   constructor(private _genres: GenreService, 
               private _actor: ActorService,
+              private _film: FilmService,
               private router: Router
               ) { }
 
@@ -196,24 +198,27 @@ removeTag(tag: string){
     let actorsId = this.getActorsId();
     let genresId = this.getGenresId();
 
-    let year = new Date(this.release_year).getFullYear();
-
     let body = {
       "title": this.title,
       "description": this.description,
       "plot": this.plot,
       "director": this.director,
       "duration": this.duration,
-      "vote": this.vote as unknown as number,
-      "release_year": year,
+      "vote": parseInt(this.vote),
+      "release_year": parseInt(this.release_year),
       "cover_url": this.cover_url,
       "tags": this.tags,
       "actors": actorsId,
       "genres": genresId
     }
 
-    console.log(body); //ancora non fa la chiamata
-    //this.router.navigate(['films/list']);
+    console.log(body);
+    this._film.addFilms(body).subscribe(
+      res => {
+        console.log(res);
+      }
+    )
+    this.router.navigate(['films/list']);
   }
 
   getActorsId(){

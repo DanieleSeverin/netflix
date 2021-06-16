@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { tap, catchError } from 'rxjs/operators';
 import { Film } from '../models/film';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -22,9 +22,25 @@ export class FilmService {
     )
   }
 
-  addFilms(body: Film){
+  addFilms(body: any){
+
+    if(!localStorage.getItem('token')){
+      alert("Non sei Loggato");
+      return of(null);
+    }
+
     let url = 'https://netflix.cristiancarrino.com/film/create.php';
-    return this.http.post(url, body)
+
+    let token: string = localStorage.getItem('token')!;
+
+    let headers = {
+			headers: new HttpHeaders({
+				'Content-Type': 'application/json',
+				'Authorization': token
+			})
+		};
+
+    return this.http.post<any>(url, body, headers)
     .pipe(
       catchError(error => {
         alert(error.status + ': ' + error.error);
@@ -34,8 +50,24 @@ export class FilmService {
   }
 
   editFilms(body: any){
+
+    if(!localStorage.getItem('token')){
+      alert("Non sei Loggato");
+      return of(null);
+    }
+
     let url = 'https://netflix.cristiancarrino.com/film/update.php';
-    return this.http.post(url, body)
+
+    let token: string = localStorage.getItem('token')!;
+
+    let headers = {
+			headers: new HttpHeaders({
+				'Content-Type': 'application/json',
+				'Authorization': token
+			})
+		};
+
+    return this.http.post<any>(url, body, headers)
     .pipe(
       catchError(error => {
         alert(error.status + ': ' + error.error);
