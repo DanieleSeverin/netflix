@@ -12,7 +12,7 @@ export class GenreService {
 
   getGenres(){
     let url = 'https://netflix.cristiancarrino.com/genre/read.php';
-    return this.http.get(url)
+    return this.http.get<Genre[]>(url)
     .pipe(
       catchError(error => {
         alert(error.status + ': ' + error.error);

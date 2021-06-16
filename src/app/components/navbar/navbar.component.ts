@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -13,8 +13,13 @@ export class NavbarComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  showLoginForm(event: any){
+  showLoginForm(event: Event){
     event.preventDefault();
     this._user.isLoginFormOpen = true;
+  }
+
+  logout(event: Event){
+    event.preventDefault();
+    this._user.logout();
   }
 }

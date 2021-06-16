@@ -4,25 +4,17 @@
 
       <!-- Lista degli Attori -->
         <div class="row">
-            <div class="col-sm-6 col-md-4 col-lg-3" *ngFor="let film of filmList">
-                <div class="card">
+            <div class="col-sm-6 col-md-4 col-lg-3" *ngFor="let actor of actorList">
+                <div class="card" style="margin-top: 1%;">
                     <div class="card-header d-flex">
-                        <span>{{film.duration.slice(0,5)}}</span>
-                        <span>{{film.vote}}</span>
+                        <h5 class="card-title">{{actor.firstname}} {{actor.lastname}}</h5>    
                     </div>
-                        <img src="{{film.cover_url}}" alt="cover image">
-                        <div class="container">
-                            <h5 class="card-title">{{film.title}}</h5>
-                            <h6 class="card-title">{{film.director}}, {{film.release_year}}</h6>
-                            <p class="card-text">{{film.description}}</p>
-                            <p style="font-weight:bold;">Attori:</p>
-                            <p>{{getActorsString(film)}}</p>
-                            <p style="font-weight:bold;">Genere:</p>
-                            <p>{{getGenresString(film)}}</p>
-                            <p style="font-weight:bold;">Tags:</p>
-                            <p>{{film.tags}}</p>
-                            <a href="" (click)="showModal(film, $event)">Mostra Trama</a>
-                        </div>
+                    <img *ngIf="actor.photo_url" src="{{actor.photo_url}}" alt="actor photo">
+                    <p class="card-text">Data di Nascita: {{actor.birthdate}}</p>
+                    <p style="font-weight:bold;">Lista di Film: </p>
+                    <div *ngFor="let film of actor.films">
+                        <span>{{film.title}} </span>
+                    </div>
                 </div>
             </div>
         </div>

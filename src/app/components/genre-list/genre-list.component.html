@@ -1,1 +1,28 @@
-<p>genre-list works!</p>
+<div class="container-fluid">
+
+    <h2>Lista dei Generi</h2>
+
+    <div *ngFor="let genre of genreList">
+        <h3 class="genre-name">{{genre.name}}</h3>
+
+        <!-- Lista dei Generi -->
+            <div class="row">
+                <div class="col-sm-6 col-md-4 col-lg-3" *ngFor="let film of genre.films"> 
+                    <div class="card">
+                        <div class="card-header d-flex">
+                            <span>{{film.duration.slice(0,5)}}</span>
+                            <span>{{film.vote}}</span>
+                        </div>
+                            <img src="{{film.cover_url}}" alt="cover image">
+                            <div class="container">
+                                <h5 class="card-title">{{film.title}}</h5>
+                                <h6 class="card-title">{{film.director}}, {{film.release_year}}</h6>
+                                <p class="card-text">{{film.description}}</p>
+                            </div>
+                    </div>
+                </div>
+            </div>
+
+    </div>
+
+</div>

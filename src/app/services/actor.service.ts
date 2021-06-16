@@ -12,7 +12,7 @@ export class ActorService {
 
   getActors(){
     let url = 'https://netflix.cristiancarrino.com/actor/read.php';
-    return this.http.get(url)
+    return this.http.get<Actor[]>(url)
     .pipe(
       catchError(error => {
         alert(error.status + ': ' + error.error);

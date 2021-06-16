@@ -1,9 +1,14 @@
 <div class="container-fluid">
 
-    <h2>Lista dei Film</h2>
+    <div style="margin-top: 2%;">
+        <h2 class="float-start">Lista dei Film</h2>
+        <div *ngIf="_user.loggedUser">
+            <button class="btn btn-dark float-end" type="submit" (click)="addFilm()">Aggiungi Film</button>
+        </div>
+    </div>
 
     <!-- Barra di ricerca -->
-    <form class="form-inline my-2 my-lg-0">
+    <form class="form-inline my-2 my-lg-0" style="margin-top: 1%;">
         <input class="form-control mr-sm-2" type="search" placeholder="Cerca Film" aria-label="Search" 
             [(ngModel)]="search" name="search" (ngModelChange)="inputBarIsChanged($event)">
       </form> <br>

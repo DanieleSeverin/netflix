@@ -9,10 +9,6 @@
             <label for="exampleInputPassword1" class="form-label">Password</label>
             <input type="password" class="form-control" [(ngModel)]="password" name="password" required>
         </div>
-        <div class="mb-3 form-check">
-            <input type="checkbox" class="form-check-input" id="exampleCheck1" [(ngModel)]="checkbox" name="checkbox">
-            <label class="form-check-label" for="exampleCheck1">Ricordami</label>
-        </div>
           <button type="submit" class="btn btn-outline-dark" style="margin-right: 1%;" (click)="login()">Login</button>
           <button type="submit" class="btn btn-outline-dark" (click)="closeLoginForm($event)">Chiudi</button>
     </form>

@@ -11,13 +11,10 @@ export class LoginFormComponent implements OnInit {
 
   username: string = '';
   password: string = '';
-  checkbox: any;
 
   constructor(public _user: UserService) { }
 
-  ngOnInit(): void {
-    this.checkbox = false;
-  }
+  ngOnInit(): void { }
 
   closeLoginForm(event: any){
     if(event != null){
@@ -30,18 +27,12 @@ export class LoginFormComponent implements OnInit {
   login(){
     this._user.login({username: this.username, password: this.password}).subscribe(
         (res: any) => {
-          if(this.checkbox){
-            this.rememberMe(res);
-          }
+          localStorage.setItem('user', JSON.stringify(res));
+          localStorage.setItem('token', res.token);
           this._user.loggedUser = res;
           this.closeLoginForm(null);
         }
     );
-  }
-
-  rememberMe(user: User){
-    localStorage.setItem('user', JSON.stringify(user));
-    localStorage.setItem('token', user.token);
   }
 
 }

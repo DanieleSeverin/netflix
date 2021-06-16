@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { tap, catchError } from 'rxjs/operators';
+import { catchError } from 'rxjs/operators';
 import { User } from '../models/user';
 
 @Injectable({
@@ -31,7 +31,7 @@ export class UserService {
   logout(){
     localStorage.removeItem('token');
     localStorage.removeItem('user');
-    // continua...
+    this.loggedUser = null;
   }
 
   editUserinfo(body: any){
