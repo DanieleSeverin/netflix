@@ -21,7 +21,6 @@ export class ActorListComponent implements OnInit {
   }
 
   getActors(){
-
     this._actor.getActors().subscribe(
       (res) => {
         this.actorList = res;
