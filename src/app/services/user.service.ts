@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, tap } from 'rxjs/operators';
 import { User } from '../models/user';
+import { of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -39,8 +40,22 @@ export class UserService {
   }
 
   editUserinfo(body: any){
+    if(!localStorage.getItem('token')){
+      alert("Non sei Loggato");
+      return of(null);
+    }
+
+    let token: string = localStorage.getItem('token')!;
+
+    let headers = {
+			headers: new HttpHeaders({
+				'Content-Type': 'application/json',
+				'Authorization': token
+			})
+		};
+    
     let url = 'https://netflix.cristiancarrino.com/user/edit.php';
-    return this.http.post(url, body)
+    return this.http.post<any>(url, body, headers)
     .pipe(
       catchError(error => {
         alert(error.status + ': ' + error.error);
@@ -63,5 +78,30 @@ export class UserService {
       this.loggedUser = JSON.parse(localStorage.getItem('user')!);
       this.id = this.loggedUser!.id;
     }
+  }
+
+  modifyFavourite(body: {id: number | undefined}[], route: string){
+    if(!localStorage.getItem('token')){
+      alert("Non sei Loggato");
+      return of(null);
+    }
+
+    let token: string = localStorage.getItem('token')!;
+
+    let headers = {
+			headers: new HttpHeaders({
+				'Content-Type': 'application/json',
+				'Authorization': token
+			})
+		};
+    
+    let url = 'https://netflix.cristiancarrino.com/user/' + route + '.php';
+    return this.http.post<any>(url, body, headers)
+    .pipe(
+      catchError(error => {
+        alert(error.status + ': ' + error.error);
+        return[];
+      })
+    )
   }
 }

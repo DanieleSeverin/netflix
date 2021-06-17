@@ -13,28 +13,91 @@
         </div>
 
         <!-- Password -->
-          <div class="col-md-6">
+        <div class="col-md-6">
             <label for="password" class="form-label">Password</label>
             <input type="text" class="form-control" id="password" [(ngModel)]="password" name="password">
-          </div>
-  
-          <!-- Nome -->
-          <div class="col-md-6">
+        </div>
+
+        <!-- Nome -->
+        <div class="col-md-6">
             <label for="firstname" class="form-label">Nome</label>
             <input type="text" class="form-control" id="firstname" [(ngModel)]="firstname" name="firstname">
-          </div>
-  
-          <!-- Cognome -->
-          <div class="col-md-6">
+        </div>
+
+        <!-- Cognome -->
+        <div class="col-md-6">
             <label for="lastname" class="form-label">Cognome</label>
             <input type="text" class="form-control" id="lastname" [(ngModel)]="lastname" name="lastname">
-          </div>
+        </div>
+
+        <!-- Data di Nascita -->
+        <div class="col-md-6">
+            <label for="birthdate" class="form-label">Data di Nascita</label>
+            <input type="date" class="form-control" id="birthdate" [(ngModel)]="birthdate" name="birthdate">
+        </div>
+        
+        <!-- Films -->
+        <div class="col-md-6">
+          <label for="films" class="form-label">Film Preferiti</label>
   
-          <!-- Data di Nascita -->
-          <div class="col-md-6">
-              <label for="birthdate" class="form-label">Data di Nascita</label>
-              <input type="date" class="form-control" id="birthdate" [(ngModel)]="birthdate" name="birthdate">
+          <!-- Film Badges -->
+          <div *ngFor="let films of selectedFilms">
+              <span class="badge rounded-pill bg-primary" style="float: left; margin-bottom: 2%;">
+              {{films}}
+              <button type="button" class="btn-close" aria-label="Close" (click)="removeFilm(films)"></button>
+              </span>
+          </div> <br>
+  
+          <!-- Select Films -->
+          <select id="films" class="form-select" [ngModel]="selectedFilms" (ngModelChange)="filmIsChanged($event)" name="selectedFilm">
+              <option selected>Scegli...</option>
+              <option *ngFor="let film of filmList">
+              {{film.title}}
+              </option>
+          </select>
           </div>
+
+        <!-- Actors -->
+        <div class="col-md-6">
+            <label for="actors" class="form-label">Attori Preferiti</label>
+    
+            <!-- Actor Badges -->
+            <div *ngFor="let actor of selectedActors">
+                <span class="badge rounded-pill bg-primary" style="float: left; margin-bottom: 2%;">
+                {{actor}}
+                <button type="button" class="btn-close" aria-label="Close" (click)="removeActor(actor)"></button>
+                </span>
+            </div> <br>
+    
+            <!-- Select Actors -->
+            <select id="actors" class="form-select" [ngModel]="selectedActor" (ngModelChange)="actorIsChanged($event)" name="selectedActor">
+                <option selected>Scegli...</option>
+                <option *ngFor="let actor of actorList">
+                {{actor.firstname}} {{actor.lastname}}
+                </option>
+            </select>
+            </div>
+
+        <!-- Generi -->
+        <div class="col-md-6">
+          <label for="genres" class="form-label">Generi Preferiti</label>
+
+          <!-- Genres Badges -->
+          <div *ngFor="let genre of selectedGenres">
+            <span class="badge rounded-pill bg-primary" style="float: left; margin-bottom: 2%;">
+              {{genre}}
+              <button type="button" class="btn-close" aria-label="Close" (click)="removeGenre(genre)"></button>
+            </span>
+          </div> <br>
+
+          <!-- Select Genres -->
+          <select id="genres" class="form-select" [ngModel]="selectedGenres" (ngModelChange)="genreIsChanged($event)" name="selectedGenres">
+            <option selected>Scegli...</option>
+            <option *ngFor="let genre of genreList">
+              {{genre.name}}
+            </option>
+          </select>
+        </div>
   
         <!-- URL Foto -->
         <div class="col">
