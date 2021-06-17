@@ -20,7 +20,7 @@
                     <div class="card-header d-flex">
                         <span>{{film.duration.slice(0,5)}}</span>
                         <span>{{film.vote}}</span>
-                        <div *ngIf="id != -1 && id == film.created_by">
+                        <div *ngIf="_user.id != -1 && _user.id == film.created_by">
                             <button type="button" class="btn btn-outline-info btn-sm" aria-label="Edit" (click)="editFilm(film.id)">Modifica</button>
                         </div>
                     </div>
@@ -42,3 +42,6 @@
         </div>
 
 </div>
+
+<!-- Modale -->
+<app-modal [film]="film"></app-modal>

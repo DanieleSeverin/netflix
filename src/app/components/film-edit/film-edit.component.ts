@@ -34,6 +34,7 @@ export class FilmEditComponent implements OnInit {
   selectedGenreList: Genre[] = [];
   selectedTags: string[] = [];
   cover_url: string = '';
+  isAlertShowing: boolean = false;
 
   constructor(private _genres: GenreService, 
               private _actor: ActorService,
@@ -282,6 +283,22 @@ removeTag(tag: string){
       arr.push({id: x.id});
     })
     return arr;
+  }
+
+  showAndHideAlert(){
+    console.log('showAndHideAlert')
+    this.isAlertShowing = !this.isAlertShowing;
+  }
+
+  deleteFilm(){
+    console.log('delete film');
+    this.showAndHideAlert();
+
+    this._film.removeFilms({id: parseInt(this.id)}).subscribe(
+      res => {
+        console.log(res);
+      });
+    this.router.navigate(['films/list']);
   }
 
 }

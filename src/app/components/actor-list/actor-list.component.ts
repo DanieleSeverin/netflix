@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Actor } from 'src/app/models/actor';
 import { Film } from 'src/app/models/film';
 import { ActorService } from 'src/app/services/actor.service';
 import { FilmService } from 'src/app/services/film.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-actor-list',
@@ -14,7 +16,11 @@ export class ActorListComponent implements OnInit {
   actorList: Actor[] | null = null;
   filmList: Film[] | null = null;
 
-  constructor(private _actor: ActorService, private _film : FilmService) { }
+  constructor(private _actor: ActorService, 
+              private _film : FilmService,
+              public _user : UserService,
+              private router : Router
+              ) { }
 
   ngOnInit(): void {
     this.getActors();
@@ -50,6 +56,10 @@ export class ActorListComponent implements OnInit {
         });
       });
     })
+  }
+
+  addActor(){
+    this.router.navigate(['actors/add']);
   }
 
 }

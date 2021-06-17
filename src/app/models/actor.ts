@@ -9,4 +9,4 @@ export interface Actor {
     created_by?: number;
     created_at?: Date;
     films?: Film[];
-}
+} 

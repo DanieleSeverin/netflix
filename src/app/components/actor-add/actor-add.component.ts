@@ -12,4 +12,4 @@ export class ActorAddComponent implements OnInit {
   ngOnInit(): void {
   }
 
-}
+} 

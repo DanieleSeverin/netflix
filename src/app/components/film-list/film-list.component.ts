@@ -17,8 +17,6 @@ export class FilmListComponent implements OnInit {
   filmList: Film[] | null = null;
   film!: Film;
   search: string | null = null;
-  user: User | null = null;
-  id:any;
 
   constructor(private _film: FilmService,
               public _user: UserService,
@@ -28,9 +26,6 @@ export class FilmListComponent implements OnInit {
 
   ngOnInit(): void {
     this.getFilms();
-    if(localStorage.getItem('user'))
-      this.user = JSON.parse(localStorage.getItem('user')!);
-    this.id = this.user?.id || -1;
   }
 
   getFilms(search?: string | null){

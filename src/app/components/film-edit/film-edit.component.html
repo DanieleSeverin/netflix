@@ -1,6 +1,18 @@
-<h2>Aggiungi un Film</h2>
 
-<div class="container">
+<div style="margin: 2%;">
+  <h2 class="float-start">Modifica Film</h2>
+  <button class="btn btn-dark float-end" type="submit" (click)="showAndHideAlert()">Elimina Film</button>
+</div>
+
+<div class="container float-start" style="margin: 2%;" *ngIf="isAlertShowing">
+  <div class="alert alert-danger" role="alert">
+    <p>Sei sicuro di voler eliminare questo film?</p>
+    <button (click)="deleteFilm()">Si</button>
+    <button (click)="showAndHideAlert()">No</button>
+  </div>
+</div>
+
+<div class="container float-start" style="margin: 2%;">
     <form class="row g-3">
 
         <!-- Titolo -->

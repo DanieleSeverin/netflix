@@ -29,7 +29,6 @@ export class LoginFormComponent implements OnInit {
         (res: any) => {
           localStorage.setItem('user', JSON.stringify(res));
           localStorage.setItem('token', res.token);
-          this._user.loggedUser = res;
           this.closeLoginForm(null);
         }
     );

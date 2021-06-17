@@ -76,9 +76,25 @@ export class FilmService {
     )
   }
 
-  removeFilms(body: any){
+  removeFilms(body: {id: number}){
+
+    if(!localStorage.getItem('token')){
+      alert("Non sei Loggato");
+      return of(null);
+    }
+
     let url = 'https://netflix.cristiancarrino.com/film/delete.php';
-    return this.http.post(url, body)
+
+    let token: string = localStorage.getItem('token')!;
+
+    let headers = {
+			headers: new HttpHeaders({
+				'Content-Type': 'application/json',
+				'Authorization': token
+			})
+		};
+
+    return this.http.post<any>(url, body, headers)
     .pipe(
       catchError(error => {
         alert(error.status + ': ' + error.error);

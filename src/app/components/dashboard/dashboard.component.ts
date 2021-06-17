@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Film } from 'src/app/models/film';
+import { User } from 'src/app/models/user';
 import { FilmService } from 'src/app/services/film.service';
 import { ModalService } from 'src/app/services/modal.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -15,7 +18,11 @@ export class DashboardComponent implements OnInit {
   actorsString: string = '';
   film!: Film;
 
-  constructor(private _film : FilmService, public _modal: ModalService) { }
+  constructor(private _film : FilmService, 
+              public _modal: ModalService,
+              public _user: UserService,
+              private router: Router
+              ) { }
 
   ngOnInit(): void {
     this.getLastFilms();
@@ -71,6 +78,10 @@ export class DashboardComponent implements OnInit {
     event.preventDefault();
     this.film = film;
     this._modal.showModal();
+  }
+
+  editFilm(id:number){
+    this.router.navigate(['films/edit/' + id]);
   }
 
 }

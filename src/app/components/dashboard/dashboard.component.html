@@ -8,6 +8,9 @@
                     <div class="card-header d-flex">
                         <span>{{film.duration.slice(0,5)}}</span>
                         <span>{{film.vote}}</span>
+                        <div *ngIf="_user.id != -1 && _user.id == film.created_by">
+                            <button type="button" class="btn btn-outline-info btn-sm" aria-label="Edit" (click)="editFilm(film.id)">Modifica</button>
+                        </div>
                     </div>
                         <img src="{{film.cover_url}}" alt="cover image">
                         <div class="container">
@@ -36,6 +39,9 @@
                     <div class="card-header d-flex">
                         <span>{{film.duration.slice(0,5)}}</span>
                         <span>{{film.vote}}</span>
+                        <div *ngIf="_user.id != -1 && _user.id == film.created_by">
+                            <button type="button" class="btn btn-outline-info btn-sm" aria-label="Edit" (click)="editFilm(film.id)">Modifica</button>
+                        </div>
                     </div>
                         <img src="{{film.cover_url}}" alt="cover image">
                         <div class="container">
