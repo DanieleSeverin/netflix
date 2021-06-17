@@ -9,8 +9,8 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class LoginFormComponent implements OnInit {
 
-  username: string = '';
-  password: string = '';
+  username: string = 'dani';
+  password: string = 'dani';
 
   constructor(public _user: UserService) { }
 

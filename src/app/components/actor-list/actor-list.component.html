@@ -13,7 +13,10 @@
             <div class="col-sm-6 col-md-4 col-lg-3" *ngFor="let actor of actorList">
                 <div class="card" style="margin-top: 1%;">
                     <div class="card-header d-flex">
-                        <h5 class="card-title">{{actor.firstname}} {{actor.lastname}}</h5>    
+                        <h5 class="card-title">{{actor.firstname}} {{actor.lastname}}</h5>  
+                        <div *ngIf="_user.id != -1 && _user.id == actor.created_by">
+                            <button type="button" class="btn btn-outline-info btn-sm" aria-label="Edit" (click)="editActor(actor.id)">Modifica</button>
+                        </div>  
                     </div>
                     <img *ngIf="actor.photo_url" src="{{actor.photo_url}}" alt="actor photo">
                     <p class="card-text">Data di Nascita: {{actor.birthdate}}</p>

@@ -47,8 +47,21 @@ export class ActorService {
   }
 
   editActor(body: any){
+    if(!localStorage.getItem('token')){
+      alert("Non sei Loggato");
+      return of(null);
+    }
+    let token: string = localStorage.getItem('token')!;
+
+    let headers = {
+			headers: new HttpHeaders({
+				'Content-Type': 'application/json',
+				'Authorization': token
+			})
+		};
+
     let url = 'https://netflix.cristiancarrino.com/actor/update.php';
-    return this.http.post(url, body)
+    return this.http.post<any>(url, body, headers)
     .pipe(
       catchError(error => {
         alert(error.status + ': ' + error.error);
@@ -58,8 +71,21 @@ export class ActorService {
   }
 
   removeActor(body: any){
+    if(!localStorage.getItem('token')){
+      alert("Non sei Loggato");
+      return of(null);
+    }
+    let token: string = localStorage.getItem('token')!;
+
+    let headers = {
+			headers: new HttpHeaders({
+				'Content-Type': 'application/json',
+				'Authorization': token
+			})
+		};
+
     let url = 'https://netflix.cristiancarrino.com/actor/delete.php';
-    return this.http.post(url, body)
+    return this.http.post<any>(url, body, headers)
     .pipe(
       catchError(error => {
         alert(error.status + ': ' + error.error);

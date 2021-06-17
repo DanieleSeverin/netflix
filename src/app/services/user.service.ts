@@ -13,9 +13,7 @@ export class UserService {
   id: any = -1;
 
   constructor(private http: HttpClient) { 
-    if(localStorage.getItem('user') != null){
-      this.loggedUser = JSON.parse(localStorage.getItem('user')!);
-    }
+    this.initializeUser();
   }
 
   login(body: any){
@@ -58,5 +56,12 @@ export class UserService {
       } else {
           return JSON.parse(user);
       }
+  }
+
+  initializeUser(){
+    if(localStorage.getItem('user') != null){
+      this.loggedUser = JSON.parse(localStorage.getItem('user')!);
+      this.id = this.loggedUser!.id;
+    }
   }
 }

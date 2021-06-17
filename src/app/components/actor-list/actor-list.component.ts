@@ -62,4 +62,8 @@ export class ActorListComponent implements OnInit {
     this.router.navigate(['actors/add']);
   }
 
+  editActor(id: number){
+    this.router.navigate(['actors/edit/' + id]);
+  }
+
 }

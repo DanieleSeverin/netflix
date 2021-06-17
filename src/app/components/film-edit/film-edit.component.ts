@@ -49,11 +49,11 @@ export class FilmEditComponent implements OnInit {
 
     this.activatedRoute.params.subscribe((params)=>{
       this.id = params.id;
-      this.getFilm(this.id);
+      this.getFilm();
     });
   }
 
-  getFilm(id: string){
+  getFilm(){
     this._film.getFilms().subscribe(
       (res) => {
         let filmList = res;
