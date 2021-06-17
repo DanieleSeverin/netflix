@@ -11,7 +11,7 @@
     <div class="float-start row" style="width: 100%;">
             <div *ngFor="let genre of genreList">
                 <h3 class="genre-name">{{genre.name}}</h3>
-                <div *ngIf="_user.id != -1 && _user.id == genre.created_by">
+                <div *ngIf="_user.id != -1 && _user.id == genre.created_by"> <!-- non arriva genre.created_by dal server, quindi i generi non saranno modificabili -->
                     <button type="button" class="btn btn-outline-info btn-sm" aria-label="Edit" (click)="editGenre(genre.id)">Modifica</button>
                 </div>
             <!-- Lista dei Film appartenente al Genere -->

@@ -19,6 +19,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ModalComponent } from './components/modal/modal.component';
 import { LoginFormComponent } from './components/navbar/login-form/login-form.component';
 import { FormsModule } from '@angular/forms';
+import { UserEditComponent } from './components/user-edit/user-edit.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { FormsModule } from '@angular/forms';
     GenreListComponent,
     NavbarComponent,
     ModalComponent,
-    LoginFormComponent
+    LoginFormComponent,
+    UserEditComponent
   ],
   imports: [
     BrowserModule,

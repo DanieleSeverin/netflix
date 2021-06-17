@@ -40,14 +40,14 @@
         <input type="text" class="form-control" id="cover_url" [(ngModel)]="photo_url" name="photo_url">
       </div> <br>
 
-      <!-- Immagine Copertina se presente -->
+      <!-- Foto se presente -->
       <div class="container">
         <div class="card col">
           <img [src]="photo_url" alt="foto non presente.">
         </div>
       </div>
 
-      <!-- Add Film Button -->
+      <!-- Edit Film Button -->
         <div class="col-12">
           <button type="submit" class="btn btn-primary" (click)="editActor()">Modifica</button>
         </div>
