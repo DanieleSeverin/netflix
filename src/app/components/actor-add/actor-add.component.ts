@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { ActorService } from 'src/app/services/actor.service';
 
 @Component({
   selector: 'app-actor-add',
@@ -7,9 +9,38 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ActorAddComponent implements OnInit {
 
-  constructor() { }
+  firstname: string = '';
+  lastname: string = '';
+  birthdate: Date | null = null;
+  photo_url: string = '';
+
+  constructor(private _actor : ActorService,
+              private router : Router) { }
 
   ngOnInit(): void {
+  }
+
+  addActor(){
+
+    if(!(this.firstname && this.lastname && this.birthdate && this.photo_url)){
+      alert("Tutti i campi sono obbligatori!");
+      return;
+    }
+
+    let body = {
+      firstname : this.firstname,
+      lastname : this.lastname,
+      birthdate : this.birthdate,
+      photo_url : this.photo_url
+    }
+
+    console.log(body);
+    this._actor.addActor(body).subscribe(
+      res => {
+        console.log(res);
+      }
+    )
+    this.router.navigate(['actors/list']);
   }
 
 } 
