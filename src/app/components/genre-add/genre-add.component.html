@@ -1,1 +1,30 @@
-<p>genre-add works!</p>
+<h2>Aggiungi un Genere</h2>
+
+<div class="container">
+    <form class="row g-3">
+
+        <!-- Nome -->
+        <div class="col-md-6">
+          <label for="name" class="form-label">Nome</label>
+          <input type="text" class="form-control" id="name" [(ngModel)]="name" name="name">
+        </div>
+
+      <!-- URL Immagine -->
+      <div class="col">
+        <label for="image_url" class="form-label">URL Foto</label>
+        <input type="text" class="form-control" id="image_url" [(ngModel)]="image_url" name="image_url">
+      </div> <br>
+
+      <!-- Immagine se presente -->
+      <div class="container">
+        <div class="card col">
+          <img [src]="image_url" alt="immagine non presente.">
+        </div>
+      </div>
+
+      <!-- Add Genre Button -->
+        <div class="col-12">
+          <button type="submit" class="btn btn-primary" (click)="addGenre()">Inserisci</button>
+        </div>
+      </form>
+</div>

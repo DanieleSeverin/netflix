@@ -1,1 +1,43 @@
-<p>genre-edit works!</p>
+
+<div style="margin: 2%;">
+    <h2 class="float-start">Modifica Genere</h2>
+    <button class="btn btn-dark float-end" type="submit" (click)="showAndHideAlert()">Elimina Genere</button>
+</div>
+
+<!-- Alert -->
+<div class="container float-start" style="margin: 2%;" *ngIf="isAlertShowing">
+    <div class="alert alert-danger" role="alert">
+        <p>Sei sicuro di voler eliminare questo attore?</p>
+        <button (click)="deleteGenre()">Si</button>
+        <button (click)="showAndHideAlert()">No</button>
+    </div>
+</div>
+
+<div class="container">
+    <form class="row g-3">
+
+        <!-- Nome -->
+        <div class="col-md-6">
+          <label for="name" class="form-label">Nome</label>
+          <input type="text" class="form-control" id="name" [(ngModel)]="name" name="name">
+        </div>
+
+      <!-- URL Immagine -->
+      <div class="col">
+        <label for="image_url" class="form-label">URL Foto</label>
+        <input type="text" class="form-control" id="image_url" [(ngModel)]="image_url" name="image_url">
+      </div> <br>
+
+      <!-- Immagine se presente -->
+      <div class="container">
+        <div class="card col">
+          <img [src]="image_url" alt="immagine non presente.">
+        </div>
+      </div>
+
+      <!-- Add Genre Button -->
+        <div class="col-12">
+          <button type="submit" class="btn btn-primary" (click)="addGenre()">Modifica</button>
+        </div>
+      </form>
+</div>
