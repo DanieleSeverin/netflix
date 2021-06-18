@@ -85,8 +85,8 @@ export class ActorEditComponent implements OnInit {
     this._actor.removeActor({id: parseInt(this.id)}).subscribe(
       res => {
         console.log(res);
+        this.router.navigate(['actors/list']);
       });
-    this.router.navigate(['actors/list']);
   }
 
 }

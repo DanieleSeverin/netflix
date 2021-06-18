@@ -212,13 +212,13 @@ removeTag(tag: string){
       "genres": genresId
     }
 
-    console.log(body);
+
     this._film.addFilms(body).subscribe(
       res => {
         console.log(res);
+        this.router.navigate(['films/list']);
       }
     )
-    this.router.navigate(['films/list']);
   }
 
   getActorsId(){

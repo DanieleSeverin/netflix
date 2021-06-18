@@ -33,9 +33,9 @@ export class GenreAddComponent implements OnInit {
     this._genre.addGenre(body).subscribe(
       res => {
         console.log(res);
+        this.router.navigate(['genres/list']);
       }
     )
-    this.router.navigate(['genres/list']);
   }
 
 }

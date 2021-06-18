@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -8,7 +9,7 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class NavbarComponent implements OnInit {
 
-  constructor(public _user: UserService) { }
+  constructor(public _user: UserService, private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -21,5 +22,6 @@ export class NavbarComponent implements OnInit {
   logout(event: Event){
     event.preventDefault();
     this._user.logout();
+    this.router.navigate(['dashboard']);
   }
 }

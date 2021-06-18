@@ -297,8 +297,8 @@ removeTag(tag: string){
     this._film.removeFilms({id: parseInt(this.id)}).subscribe(
       res => {
         console.log(res);
+        this.router.navigate(['films/list']);
       });
-    this.router.navigate(['films/list']);
   }
 
 }

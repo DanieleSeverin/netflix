@@ -80,7 +80,7 @@ export class UserService {
     }
   }
 
-  modifyFavourite(body: {id: number | undefined}[], route: string){
+  modifyFavourite(body: {ids: string}, route: string){
     if(!localStorage.getItem('token')){
       alert("Non sei Loggato");
       return of(null);

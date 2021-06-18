@@ -42,13 +42,15 @@ export class UserEditComponent implements OnInit {
               private _film: FilmService,
               private router: Router) { 
     this.user = JSON.parse(localStorage.getItem('user')!);
-    this.populateVariables();
   }
 
   ngOnInit(): void {
     this.getGenres();
     this.getActors();
     this.getFilms();
+    //this.populateVariables(); <- l'ho messa alla fine di getFilms 
+    console.log('ngOnInit')
+    console.log(this.selectedActorList);
   }
 
   getGenres(){
@@ -71,6 +73,7 @@ export class UserEditComponent implements OnInit {
     this._film.getFilms().subscribe(
       (res) => {
         this.filmList = res;
+        this.populateVariables();
         }
       );
   }
@@ -92,6 +95,7 @@ addFilmObj(filmName: string){
   this.filmList!.map ( film => {
     if(film.title.trim() == filmName){
       this.selectedFilmsList.push(film);
+      console.log('addFilmObj')
       console.log(this.selectedFilmsList);
       return;
     }
@@ -99,12 +103,10 @@ addFilmObj(filmName: string){
 }
 
 removeFilm(film: string){
-  console.log('remove film: ' + film);
   const index = this.selectedFilms.indexOf(film);
   if (index > -1) {
     this.selectedFilms.splice(index, 1);
   }
-  console.log(this.selectedFilms); 
   this.removeFilmObj(film);
 }
 
@@ -115,6 +117,7 @@ removeFilmObj(filmName: string){
   this.selectedFilmsList.map ( film => {
     if(film.title.trim() == filmName){
       this.selectedFilmsList.splice(i, 1);
+      console.log('removeFilmObj')
       console.log(this.selectedFilmsList);
       return;
       }
@@ -229,6 +232,37 @@ removeGenreObj(genreName: string){
     this.lastname = this.user.lastname || '';
     this.birthdate = this.user.birthdate || undefined;
     this.photo_url = this.user.photo_url || '';
+
+    if(this.user.favorite_films){
+      this.user.favorite_films.map(x => {
+        this.filmList?.map( y => {
+          if(x == y.id){
+            this.selectedFilms.push(y.title);
+          }
+        })
+
+        })
+    }
+
+    if(this.user.favorite_actors){
+      this.user.favorite_actors.map(x => {
+        this.actorList?.map( y => {
+          if(x == y.id){
+            this.selectedActors.push(y.firstname + ' ' + y.lastname);
+          }
+        })
+      });
+    }
+
+    if(this.user.favorite_genres){
+      this.user.favorite_genres.map(x => {
+        this.genreList?.map( y => {
+          if(x == y.id){
+            this.selectedGenres.push(y.name);
+          }
+        })
+      })
+    }
   }
 
   editUser(){
@@ -239,7 +273,8 @@ removeGenreObj(genreName: string){
               firstname?: string, 
               lastname?: string, 
               photo_url?: string, 
-              birthdate?: Date | undefined
+              birthdate?: Date | undefined,
+              favorite_actors?: {id: number}[] | null
               } = {};
 
     if(this.username != '')
@@ -255,67 +290,102 @@ removeGenreObj(genreName: string){
     if(this.birthdate != undefined)
       body.birthdate = this.birthdate;
 
-    let filmsId = this.getActorsId();
+    let filmsId = this.getFilmsId();
     let actorsId = this.getActorsId();
     let genresId = this.getGenresId();
 
-    if(filmsId != []){
       this._user.modifyFavourite(filmsId, 'favorite-films').subscribe(
         res =>{
+          console.log('risposta server modifica film: ')
           console.log(res);
         }
       );
-    }
 
-    if(actorsId != []){
       this._user.modifyFavourite(actorsId, 'favorite-actors').subscribe(
         res =>{
           console.log(res);
         }
       );
-    }
 
-    if(genresId != []){
       this._user.modifyFavourite(genresId, 'favorite-genres').subscribe(
         res =>{
           console.log(res);
         }
       );
-    }
 
     this._user.editUserinfo(body).subscribe(
       res => {
         console.log(res);
+
+        let user = this.normalizeFavouritesInput(res);
+
+        localStorage.setItem('user', JSON.stringify(user));
+        this.router.navigate(['dashboard']);
       }
     )
+  }
 
-    //TODO da mettere il nuovo oggetto nella localstorage
+  normalizeFavouritesInput(res: any) :User{
+    if(res.favorite_films){
+      let favorite_films = res.favorite_films.split(',');
+      let arr :number[] = [];
+      favorite_films.map( (x: string) => {
+        arr.push(parseInt(x));
+      })
+      res.favorite_films = arr;
+    }
 
-    this.router.navigate(['dashboard']);
+    if(res.favorite_actors){
+      let favorite_actors = res.favorite_actors.split(',');
+      let arr2 :number[] = [];
+      favorite_actors.map( (x: string) => {
+        arr2.push(parseInt(x));
+      })
+      res.favorite_actors = arr2;
+    }
+
+    if(res.favorite_genres){
+      let favorite_genres = res.favorite_genres.split(',');
+      let arr3 :number[] = [];
+      favorite_genres.map( (x: string) => {
+        arr3.push(parseInt(x));
+      })
+      res.favorite_genres = arr3;
+    }
+
+
+    return res;
   }
 
   getFilmsId(){
-    let arr: {id: number}[] = []
+    let obj : {ids: string} = {ids: ''};
+    console.log('in getFilmsId')
+    console.log(this.selectedFilmsList)
     this.selectedFilmsList.map( x => {
-      arr.push({id: x.id});
+      obj.ids += x.id + ',';
     })
-    return arr;
+    obj.ids = obj.ids.slice(0, -1);
+    console.log(obj)
+    return obj;
   }
 
   getActorsId(){
-    let arr: {id: number}[] = []
+    let obj : {ids: string} = {ids: ''};
     this.selectedActorList.map( x => {
-      arr.push({id: x.id});
+      obj.ids += x.id + ',';
     })
-    return arr;
+    obj.ids = obj.ids.slice(0, -1);
+    console.log(obj)
+    return obj;
   }
 
   getGenresId(){
-    let arr: {id: number | undefined}[] = []
+    let obj : {ids: string} = {ids: ''};
     this.selectedGenreList.map( x => {
-      arr.push({id: x.id});
+      obj.ids += x.id + ',';
     })
-    return arr;
+    obj.ids = obj.ids.slice(0, -1);
+    console.log(obj)
+    return obj;
   }
-
 }

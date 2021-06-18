@@ -62,9 +62,9 @@ export class GenreEditComponent implements OnInit {
     this._genre.editGenre(body).subscribe(
       res => {
         console.log(res);
+        this.router.navigate(['genres/list']);
       }
     )
-    this.router.navigate(['genres/list']);
   }
 
   showAndHideAlert(){

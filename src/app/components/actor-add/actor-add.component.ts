@@ -34,13 +34,12 @@ export class ActorAddComponent implements OnInit {
       photo_url : this.photo_url
     }
 
-    console.log(body);
     this._actor.addActor(body).subscribe(
       res => {
         console.log(res);
+        this.router.navigate(['actors/list']);
       }
     )
-    this.router.navigate(['actors/list']);
   }
 
 } 
