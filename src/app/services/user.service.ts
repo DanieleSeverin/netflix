@@ -80,7 +80,7 @@ export class UserService {
     }
   }
 
-  modifyFavourite(body: {ids: string}, route: string){
+  async modifyFavourite(body: {ids: string}, route: string){
     if(!localStorage.getItem('token')){
       alert("Non sei Loggato");
       return of(null);
@@ -96,12 +96,11 @@ export class UserService {
 		};
     
     let url = 'https://netflix.cristiancarrino.com/user/' + route + '.php';
-    return this.http.post<any>(url, body, headers)
-    .pipe(
-      catchError(error => {
+    return await this.http.post<any>(url, body, headers).toPromise()
+      .then( res => console.log(res))
+      .catch(error => {
         alert(error.status + ': ' + error.error);
         return[];
       })
-    )
   }
 }

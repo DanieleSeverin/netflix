@@ -238,6 +238,7 @@ removeGenreObj(genreName: string){
         this.filmList?.map( y => {
           if(x == y.id){
             this.selectedFilms.push(y.title);
+            this.selectedFilmsList.push(y);
           }
         })
 
@@ -249,6 +250,7 @@ removeGenreObj(genreName: string){
         this.actorList?.map( y => {
           if(x == y.id){
             this.selectedActors.push(y.firstname + ' ' + y.lastname);
+            this.selectedActorList.push(y);
           }
         })
       });
@@ -259,6 +261,7 @@ removeGenreObj(genreName: string){
         this.genreList?.map( y => {
           if(x == y.id){
             this.selectedGenres.push(y.name);
+            this.selectedGenreList.push(y);
           }
         })
       })
@@ -294,24 +297,11 @@ removeGenreObj(genreName: string){
     let actorsId = this.getActorsId();
     let genresId = this.getGenresId();
 
-      this._user.modifyFavourite(filmsId, 'favorite-films').subscribe(
-        res =>{
-          console.log('risposta server modifica film: ')
-          console.log(res);
-        }
-      );
+    this._user.modifyFavourite(filmsId, 'favorite-films');
 
-      this._user.modifyFavourite(actorsId, 'favorite-actors').subscribe(
-        res =>{
-          console.log(res);
-        }
-      );
+    this._user.modifyFavourite(actorsId, 'favorite-actors');
 
-      this._user.modifyFavourite(genresId, 'favorite-genres').subscribe(
-        res =>{
-          console.log(res);
-        }
-      );
+    this._user.modifyFavourite(genresId, 'favorite-genres');
 
     this._user.editUserinfo(body).subscribe(
       res => {
@@ -352,15 +342,13 @@ removeGenreObj(genreName: string){
       })
       res.favorite_genres = arr3;
     }
-
-
     return res;
   }
 
   getFilmsId(){
     let obj : {ids: string} = {ids: ''};
     console.log('in getFilmsId')
-    console.log(this.selectedFilmsList)
+    console.log(this.selectedFilmsList) //TODO se non modifico la lista dei film questo campo è vuoto
     this.selectedFilmsList.map( x => {
       obj.ids += x.id + ',';
     })

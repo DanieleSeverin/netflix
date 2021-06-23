@@ -10,19 +10,21 @@
     <div class="float-start">
       <!-- Lista degli Attori -->
         <div class="row">
-            <div class="col-sm-6 col-md-4 col-lg-3" *ngFor="let actor of actorList">
-                <div class="card" style="margin-top: 1%;">
+            <div class="col-sm-6 col-md-4 col-lg-3 g-4" *ngFor="let actor of actorList">
+                <div class="card h-100">
                     <div class="card-header d-flex">
                         <h5 class="card-title">{{actor.firstname}} {{actor.lastname}}</h5>  
                         <div *ngIf="_user.id != -1 && _user.id == actor.created_by">
                             <button type="button" class="btn btn-outline-info btn-sm" aria-label="Edit" (click)="editActor(actor.id)">Modifica</button>
                         </div>  
                     </div>
-                    <img *ngIf="actor.photo_url" src="{{actor.photo_url}}" alt="actor photo">
-                    <p class="card-text">Data di Nascita: {{actor.birthdate}}</p>
-                    <p style="font-weight:bold;">Lista di Film: </p>
-                    <div *ngFor="let film of actor.films">
-                        <span>{{film.title}} </span>
+                    <div class="container card-body" style="padding: 5%;">
+                        <img *ngIf="actor.photo_url" src="{{actor.photo_url}}" class="rounded mx-auto d-block" style="margin-bottom: 2%;" alt="actor photo">
+                        <p class="card-text">Data di Nascita: {{actor.birthdate}}</p>
+                        <p style="font-weight:bold;">Lista di Film: </p>
+                        <div *ngFor="let film of actor.films">
+                            <span>{{film.title}} </span>
+                        </div>
                     </div>
                 </div>
             </div>

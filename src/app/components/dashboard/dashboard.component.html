@@ -3,8 +3,8 @@
     <!-- Ultimi Film -->
         <h2>Ultimi film</h2>
         <div class="row">
-            <div class="col-sm-6 col-md-4 col-lg-3" *ngFor="let film of lastFilms">
-                <div class="card">
+            <div class="col-sm-6 col-md-4 col-lg-3 g-2" *ngFor="let film of lastFilms">
+                <div class="card h-100">
                     <div class="card-header d-flex">
                         <span>{{film.duration.slice(0,5)}}</span>
                         <span>{{film.vote}}</span>
@@ -34,8 +34,8 @@
         <!-- Top Film -->
         <h2>Top film</h2>
         <div class="row">
-            <div class="col-sm-6 col-md-4 col-lg-3" *ngFor="let film of topFilms">
-                <div class="card">
+            <div class="col-sm-6 col-md-4 col-lg-3 g-2" *ngFor="let film of topFilms">
+                <div class="card h-100">
                     <div class="card-header d-flex">
                         <span>{{film.duration.slice(0,5)}}</span>
                         <span>{{film.vote}}</span>
