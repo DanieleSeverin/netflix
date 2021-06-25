@@ -64,7 +64,6 @@ export class ActorEditComponent implements OnInit {
       photo_url : this.photo_url
     }
 
-    console.log(body);
     this._actor.editActor(body).subscribe(
       res => {
         console.log(res);
@@ -74,12 +73,10 @@ export class ActorEditComponent implements OnInit {
   }
 
   showAndHideAlert(){
-    console.log('showAndHideAlert')
     this.isAlertShowing = !this.isAlertShowing;
   }
 
   deleteActor(){
-    console.log('delete actor');
     this.showAndHideAlert();
 
     this._actor.removeActor({id: parseInt(this.id)}).subscribe(

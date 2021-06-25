@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Film } from 'src/app/models/film';
-import { User } from 'src/app/models/user';
 import { FilmService } from 'src/app/services/film.service';
 import { ModalService } from 'src/app/services/modal.service';
 import { UserService } from 'src/app/services/user.service';
+import { faEdit } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-film-list',
@@ -13,6 +13,8 @@ import { UserService } from 'src/app/services/user.service';
 })
 
 export class FilmListComponent implements OnInit {
+
+  faEdit = faEdit;
 
   filmList: Film[] | null = null;
   film!: Film;
@@ -32,7 +34,6 @@ export class FilmListComponent implements OnInit {
     this._film.getFilms().subscribe(
       (res) => {
         this.filmList = res;
-        console.log(this.filmList);
 
         if(search){
           this.filmList = this.searchFilms(this.filmList);
@@ -42,7 +43,6 @@ export class FilmListComponent implements OnInit {
         this.filmList = this.filmList.sort((film1, film2) => {
           return (new Date(film2.created_at || '')).getTime() - (new Date(film1.created_at || '')).getTime();
         });
-        console.log(this.filmList);
       }
     );
   }

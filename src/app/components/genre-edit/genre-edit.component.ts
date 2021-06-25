@@ -58,22 +58,18 @@ export class GenreEditComponent implements OnInit {
       image_url : this.image_url
     }
 
-    console.log(body);
     this._genre.editGenre(body).subscribe(
       res => {
-        console.log(res);
         this.router.navigate(['genres/list']);
       }
     )
   }
 
   showAndHideAlert(){
-    console.log('showAndHideAlert')
     this.isAlertShowing = !this.isAlertShowing;
   }
 
   deleteGenre(){
-    console.log('delete genre');
     this.showAndHideAlert();
 
     this._genre.removeGenre({id: parseInt(this.id)}).subscribe(

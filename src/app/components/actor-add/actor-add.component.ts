@@ -36,7 +36,6 @@ export class ActorAddComponent implements OnInit {
 
     this._actor.addActor(body).subscribe(
       res => {
-        console.log(res);
         this.router.navigate(['actors/list']);
       }
     )

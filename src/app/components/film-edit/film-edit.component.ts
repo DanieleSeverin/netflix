@@ -109,8 +109,6 @@ export class FilmEditComponent implements OnInit {
 
 // Actors Input
   actorIsChanged(actorName: string){
-    console.log('actorIsChanged');
-    console.log(actorName);
     if(!this.selectedActors.includes(actorName) && actorName != 'Scegli...'){
       this.selectedActors.push(actorName);
       this.addActorObj(actorName)
@@ -125,19 +123,16 @@ export class FilmEditComponent implements OnInit {
     this.actorList!.map ( actor => {
       if(actor.firstname.trim() == firstName && actor.lastname.trim() == lastName){
         this.selectedActorList.push(actor);
-        console.log(this.selectedActorList);
         return;
       }
     })
   }
 
   removeActor(actor: string){
-    console.log('remove actor: ' + actor);
     const index = this.selectedActors.indexOf(actor);
     if (index > -1) {
       this.selectedActors.splice(index, 1);
     }
-    console.log(this.selectedActors); 
     this.removeActorObj(actor);
   }
 
@@ -150,9 +145,7 @@ export class FilmEditComponent implements OnInit {
 
     this.selectedActorList.map ( actor => {
       if(actor.firstname.trim() == firstName && actor.lastname.trim() == lastName){
-        console.log('index i: ' + i)
         this.selectedActorList.splice(i, 1);
-        console.log(this.selectedActorList);
         return;
         }
       i++;
@@ -161,8 +154,6 @@ export class FilmEditComponent implements OnInit {
 
 //Genre Input
 genreIsChanged(genreName: string){
-  console.log('genreIsChanged');
-  console.log(genreName);
   if(!this.selectedGenres.includes(genreName) && genreName != 'Scegli...'){
     this.selectedGenres.push(genreName);
     this.addGenreObj(genreName)
@@ -176,19 +167,16 @@ addGenreObj(genreName: string){
   this.genreList!.map ( genre => {
     if(genre.name.trim() == genreName){
       this.selectedGenreList.push(genre);
-      console.log(this.selectedGenreList);
       return;
     }
   })
 }
 
 removeGenre(genre: string){
-  console.log('remove genre: ' + genre);
   const index = this.selectedGenres.indexOf(genre);
   if (index > -1) {
     this.selectedGenres.splice(index, 1);
   }
-  console.log(this.selectedGenres); 
   this.removeGenreObj(genre);
 }
 
@@ -199,7 +187,6 @@ removeGenreObj(genreName: string){
   this.selectedGenreList.map ( genre => {
     if(genre.name.trim() == genreName){
       this.selectedGenreList.splice(i, 1);
-      console.log(this.selectedGenreList);
       return;
       }
     i++;
@@ -234,9 +221,6 @@ removeTag(tag: string){
 
 //Edit Film Button
   editFilm(){
-    console.log('add film');
-    console.log(this.selectedActorList);
-
     if(!(this.title && this.description && this.plot && this.director && this.duration && this.vote && this.release_year && this.cover_url && this.tags && this.selectedActorList.length > 0 && this.selectedGenreList.length > 0)){
       alert("Tutti i campi sono obbligatori!");
       return;
@@ -260,7 +244,6 @@ removeTag(tag: string){
       "genres": genresId
     }
 
-    console.log(body);
     this._film.editFilms(body).subscribe(
       res => {
         console.log(res);
@@ -286,12 +269,10 @@ removeTag(tag: string){
   }
 
   showAndHideAlert(){
-    console.log('showAndHideAlert')
     this.isAlertShowing = !this.isAlertShowing;
   }
 
   deleteFilm(){
-    console.log('delete film');
     this.showAndHideAlert();
 
     this._film.removeFilms({id: parseInt(this.id)}).subscribe(

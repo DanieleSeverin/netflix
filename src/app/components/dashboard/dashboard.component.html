@@ -6,11 +6,11 @@
             <div class="col-sm-6 col-md-4 col-lg-3 g-2" *ngFor="let film of lastFilms">
                 <div class="card h-100">
                     <div class="card-header d-flex">
-                        <span>{{film.duration.slice(0,5)}}</span>
-                        <span>{{film.vote}}</span>
-                        <div *ngIf="_user.id != -1 && _user.id == film.created_by">
-                            <button type="button" class="btn btn-outline-info btn-sm" aria-label="Edit" (click)="editFilm(film.id)">Modifica</button>
-                        </div>
+                        <span class="duration">{{film.duration.slice(0,5)}}</span>
+                        <app-star class="star mx-auto" [vote]="film.vote"></app-star>
+                        <span *ngIf="_user.id != -1 && _user.id == film.created_by" class="edit">
+                            <fa-icon [icon]="faEdit" (click)="editFilm(film.id)"></fa-icon>
+                        </span>
                     </div>
                         <img src="{{film.cover_url}}" alt="cover image">
                         <div class="container">

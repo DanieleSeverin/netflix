@@ -97,7 +97,6 @@ export class UserService {
     
     let url = 'https://netflix.cristiancarrino.com/user/' + route + '.php';
     return await this.http.post<any>(url, body, headers).toPromise()
-      .then( res => console.log(res))
       .catch(error => {
         alert(error.status + ': ' + error.error);
         return[];

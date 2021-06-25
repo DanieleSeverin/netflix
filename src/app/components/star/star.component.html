@@ -1,0 +1,11 @@
+<div>
+    <span *ngFor="let star of fullStars">
+        <fa-icon [icon]="stellaPiena"></fa-icon>
+    </span>
+    <span *ngIf="halfStars==1">
+        <fa-icon [icon]="stellaMezza"></fa-icon>
+    </span>
+    <span *ngFor="let star of voidStars">
+        <fa-icon [icon]="stellaVuota"></fa-icon>
+    </span>
+</div>

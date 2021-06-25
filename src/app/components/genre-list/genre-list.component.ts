@@ -5,6 +5,7 @@ import { Genre } from 'src/app/models/genre';
 import { FilmService } from 'src/app/services/film.service';
 import { GenreService } from 'src/app/services/genre.service';
 import { UserService } from 'src/app/services/user.service';
+import { faEdit } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-genre-list',
@@ -15,6 +16,7 @@ export class GenreListComponent implements OnInit {
 
   genreList: Genre[] | null = null;
   filmList: Film[] | null = null;
+  faEdit = faEdit;
 
   constructor(private _genres : GenreService, 
               public _user : UserService,
@@ -29,7 +31,6 @@ export class GenreListComponent implements OnInit {
     this._genres.getGenres().subscribe(
       (res) => {
         this.genreList = res;
-        console.log(this.genreList);
         this.getFilms();
         }
       );

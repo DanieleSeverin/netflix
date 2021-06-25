@@ -2,3 +2,7 @@
 body{
     background-color: darkgrey;
 }
+
+.edit:hover {
+    cursor: pointer;
+}

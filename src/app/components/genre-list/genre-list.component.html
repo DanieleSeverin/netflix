@@ -12,7 +12,7 @@
             <div *ngFor="let genre of genreList" style="margin-left: 1%;">
                 <h3 class="genre-name">{{genre.name}}</h3>
                 <div *ngIf="_user.id != -1 && _user.id == genre.created_by"> <!-- non arriva genre.created_by dal server, quindi i generi non saranno modificabili -->
-                    <button type="button" class="btn btn-outline-info btn-sm" aria-label="Edit" (click)="editGenre(genre.id)">Modifica</button>
+                    <fa-icon [icon]="faEdit" (click)="editGenre(genre.id)"></fa-icon>
                 </div>
             <!-- Lista dei Film appartenente al Genere -->
                 <div class="row">
@@ -20,7 +20,7 @@
                         <div class="card h-100">
                             <div class="card-header d-flex">
                                 <span>{{film.duration.slice(0,5)}}</span>
-                                <span>{{film.vote}}</span>
+                                <app-star class="star mx-auto" [vote]="film.vote"></app-star>
                             </div>
                                 <img src="{{film.cover_url}}" alt="cover image">
                                 <div class="container">

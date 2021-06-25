@@ -29,10 +29,8 @@ export class GenreAddComponent implements OnInit {
       image_url : this.image_url
     }
 
-    console.log(body);
     this._genre.addGenre(body).subscribe(
       res => {
-        console.log(res);
         this.router.navigate(['genres/list']);
       }
     )

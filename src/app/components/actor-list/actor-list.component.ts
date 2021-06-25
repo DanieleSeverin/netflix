@@ -5,6 +5,7 @@ import { Film } from 'src/app/models/film';
 import { ActorService } from 'src/app/services/actor.service';
 import { FilmService } from 'src/app/services/film.service';
 import { UserService } from 'src/app/services/user.service';
+import { faEdit } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-actor-list',
@@ -15,6 +16,7 @@ export class ActorListComponent implements OnInit {
 
   actorList: Actor[] | null = null;
   filmList: Film[] | null = null;
+  faEdit = faEdit;
 
   constructor(private _actor: ActorService, 
               private _film : FilmService,

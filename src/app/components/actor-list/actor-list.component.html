@@ -14,8 +14,8 @@
                 <div class="card h-100">
                     <div class="card-header d-flex">
                         <h5 class="card-title">{{actor.firstname}} {{actor.lastname}}</h5>  
-                        <div *ngIf="_user.id != -1 && _user.id == actor.created_by">
-                            <button type="button" class="btn btn-outline-info btn-sm" aria-label="Edit" (click)="editActor(actor.id)">Modifica</button>
+                        <div *ngIf="_user.id != -1 && _user.id == actor.created_by" style="margin-left: 40%;">
+                            <fa-icon [icon]="faEdit" (click)="editActor(actor.id)"></fa-icon>
                         </div>  
                     </div>
                     <div class="container card-body" style="padding: 5%;">

@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Film } from 'src/app/models/film';
-import { User } from 'src/app/models/user';
 import { FilmService } from 'src/app/services/film.service';
 import { ModalService } from 'src/app/services/modal.service';
 import { UserService } from 'src/app/services/user.service';
+import { faEdit } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-dashboard',
@@ -12,6 +12,8 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
+
+  faEdit = faEdit;
 
   lastFilms: Film[] | null = null;
   topFilms: Film[] | null = null;
@@ -36,7 +38,6 @@ export class DashboardComponent implements OnInit {
         this.lastFilms = this.lastFilms.sort((film1, film2) => {
           return (new Date(film2.created_at || '')).getTime() - (new Date(film1.created_at || '')).getTime();
         }).slice(0, 4);
-        console.log(this.lastFilms)
       }
     );
   }
@@ -48,7 +49,6 @@ export class DashboardComponent implements OnInit {
         this.topFilms = this.topFilms.sort((film1, film2) => {
           return film2.vote - film1.vote;
         }).slice(0, 4);
-        console.log(this.topFilms)
       }
     );
   }

@@ -48,9 +48,6 @@ export class UserEditComponent implements OnInit {
     this.getGenres();
     this.getActors();
     this.getFilms();
-    //this.populateVariables(); <- l'ho messa alla fine di getFilms 
-    console.log('ngOnInit')
-    console.log(this.selectedActorList);
   }
 
   getGenres(){
@@ -80,8 +77,6 @@ export class UserEditComponent implements OnInit {
 
 //Film Input
 filmIsChanged(filmName: string){
-  console.log('filmIsChanged');
-  console.log(filmName);
   if(!this.selectedFilms.includes(filmName) && filmName != 'Scegli...'){
     this.selectedFilms.push(filmName);
     this.addFilmObj(filmName)
@@ -95,8 +90,6 @@ addFilmObj(filmName: string){
   this.filmList!.map ( film => {
     if(film.title.trim() == filmName){
       this.selectedFilmsList.push(film);
-      console.log('addFilmObj')
-      console.log(this.selectedFilmsList);
       return;
     }
   })
@@ -117,8 +110,6 @@ removeFilmObj(filmName: string){
   this.selectedFilmsList.map ( film => {
     if(film.title.trim() == filmName){
       this.selectedFilmsList.splice(i, 1);
-      console.log('removeFilmObj')
-      console.log(this.selectedFilmsList);
       return;
       }
     i++;
@@ -128,8 +119,6 @@ removeFilmObj(filmName: string){
 
   // Actors Input
   actorIsChanged(actorName: string){
-    console.log('actorIsChanged');
-    console.log(actorName);
     if(!this.selectedActors.includes(actorName) && actorName != 'Scegli...'){
       this.selectedActors.push(actorName);
       this.addActorObj(actorName)
@@ -144,19 +133,16 @@ removeFilmObj(filmName: string){
     this.actorList!.map ( actor => {
       if(actor.firstname.trim() == firstName && actor.lastname.trim() == lastName){
         this.selectedActorList.push(actor);
-        console.log(this.selectedActorList);
         return;
       }
     })
   }
 
   removeActor(actor: string){
-    console.log('remove actor: ' + actor);
     const index = this.selectedActors.indexOf(actor);
     if (index > -1) {
       this.selectedActors.splice(index, 1);
-    }
-    console.log(this.selectedActors); 
+    } 
     this.removeActorObj(actor);
   }
 
@@ -169,9 +155,7 @@ removeFilmObj(filmName: string){
 
     this.selectedActorList.map ( actor => {
       if(actor.firstname.trim() == firstName && actor.lastname.trim() == lastName){
-        console.log('index i: ' + i)
         this.selectedActorList.splice(i, 1);
-        console.log(this.selectedActorList);
         return;
         }
       i++;
@@ -180,8 +164,6 @@ removeFilmObj(filmName: string){
 
 //Genre Input
 genreIsChanged(genreName: string){
-  console.log('genreIsChanged');
-  console.log(genreName);
   if(!this.selectedGenres.includes(genreName) && genreName != 'Scegli...'){
     this.selectedGenres.push(genreName);
     this.addGenreObj(genreName)
@@ -195,19 +177,16 @@ addGenreObj(genreName: string){
   this.genreList!.map ( genre => {
     if(genre.name.trim() == genreName){
       this.selectedGenreList.push(genre);
-      console.log(this.selectedGenreList);
       return;
     }
   })
 }
 
 removeGenre(genre: string){
-  console.log('remove genre: ' + genre);
   const index = this.selectedGenres.indexOf(genre);
   if (index > -1) {
     this.selectedGenres.splice(index, 1);
-  }
-  console.log(this.selectedGenres); 
+  } 
   this.removeGenreObj(genre);
 }
 
@@ -218,7 +197,6 @@ removeGenreObj(genreName: string){
   this.selectedGenreList.map ( genre => {
     if(genre.name.trim() == genreName){
       this.selectedGenreList.splice(i, 1);
-      console.log(this.selectedGenreList);
       return;
       }
     i++;
@@ -269,7 +247,6 @@ removeGenreObj(genreName: string){
   }
 
   editUser(){
-    console.log('edit user');
 
     let body: {username?: string, 
               password?: string, 
@@ -347,13 +324,10 @@ removeGenreObj(genreName: string){
 
   getFilmsId(){
     let obj : {ids: string} = {ids: ''};
-    console.log('in getFilmsId')
-    console.log(this.selectedFilmsList) //TODO se non modifico la lista dei film questo campo è vuoto
     this.selectedFilmsList.map( x => {
       obj.ids += x.id + ',';
     })
     obj.ids = obj.ids.slice(0, -1);
-    console.log(obj)
     return obj;
   }
 
@@ -363,7 +337,6 @@ removeGenreObj(genreName: string){
       obj.ids += x.id + ',';
     })
     obj.ids = obj.ids.slice(0, -1);
-    console.log(obj)
     return obj;
   }
 
@@ -373,7 +346,6 @@ removeGenreObj(genreName: string){
       obj.ids += x.id + ',';
     })
     obj.ids = obj.ids.slice(0, -1);
-    console.log(obj)
     return obj;
   }
 }
